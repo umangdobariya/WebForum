@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "List";
+}
+
+
+@foreach (Topic topics in Model.Topics)
+{
+    <h1>Topic Name: @topics.Subject</h1>
+    <h5><a href="@Url.Action("Add", "Reply", new { @topics.Id })">Add Reply</a>
+        <a href="@Url.Action("List", "Topic", new {id = @topics.ForumId})"> Back to TopicMenu</a></h5>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Reply</th>
+            <th>Posted Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ var counter = 1;
+            foreach (Reply replies in Model.Replies)
+            {
+                <tr>
+                    <td>@counter</td>
+                    <td>
+                        @replies.Rep
+                    </td>
+                    <td>@replies.time</td>
+                </tr>
+                counter = counter + 1;
+            }
+        }
+
+    </tbody>
+</table>
+

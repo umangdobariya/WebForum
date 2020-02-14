@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "List";
+}
+  <h1>Topic Menu </h1>
+@foreach (Forum forums in Model.Forums)
+{
+    <h4>Forum Name: @forums.Name</h4>
+    <h5><a href="@Url.Action("Add", "Topic", new { @forums.Id })">Add Topic</a>
+    <a href="@Url.Action("List", "Forum")"> Back to ForumMenu</a></h5>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Topic Name</th>
+            <th>Posted Time</th>
+        </tr>
+    </thead>
+    <tbody>
+       @{    var counter = 1;
+           foreach(Topic topics in Model.Topics)
+           {
+            <tr>
+                <td>@counter</td>
+                <td>
+                    <a href="@Url.Action("List", "Reply", new { @topics.Id })">@topics.Subject</a>
+                </td>
+                <td>@topics.time</td>
+            </tr>
+             counter = counter + 1;
+           }
+        }       
+    </tbody>
+</table>
+
